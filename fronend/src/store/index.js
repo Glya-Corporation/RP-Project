@@ -1,0 +1,9 @@
+/* eslint-disable no-undef */
+import { configureStore } from '@reduxjs/toolkit';
+import userSlice from './slices/user.slice';
+
+export default configureStore({
+    reducer: {
+        user: userSlice,
+    },
+});
