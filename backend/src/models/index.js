@@ -1,5 +1,4 @@
+const Users = require('./Users.model');
+const Products = require('./Products.model');
 
-const nameData = require('./');
-
-
-module.exports = { allConsts };
+module.exports = { Users, Products };

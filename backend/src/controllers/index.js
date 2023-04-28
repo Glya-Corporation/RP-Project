@@ -1,5 +1,31 @@
+const {
+  createUser,
+  getUser,
+  getAllUsersByRole,
+  updateUser,
+  verifyUser,
+  updatePasswordUser,
+  deleteUser
+} = require('./user.controller.js');
+const {
+  createProducts,
+  getProduct,
+  getAllProductsByBusiness,
+  updateProduct,
+  deleteProduct
+} = require('./products.controller.js');
 
-const nameData = require('./');
-
-
-module.exports = { allConsts };
+module.exports = {
+  createUser,
+  getUser,
+  getAllUsersByRole,
+  updateUser,
+  verifyUser,
+  updatePasswordUser,
+  deleteUser,
+  createProducts,
+  getProduct,
+  getAllProductsByBusiness,
+  updateProduct,
+  deleteProduct
+};

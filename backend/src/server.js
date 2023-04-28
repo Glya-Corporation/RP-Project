@@ -19,6 +19,6 @@ app.set("io", io);
 const PORT = process.env.PORT || 8000;
 
 server.listen(PORT, () => {
-  console.log("servidor corriendo");
+  console.log(`Runing server in: ${process.env.HOST}`);
   swaggerDocs(app, PORT);
 });
