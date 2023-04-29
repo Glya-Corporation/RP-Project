@@ -4,14 +4,15 @@ class UserServices {
   static async createUser(datos) {
     try {
       const {
-        username, email, password, dni, roleId, imgProfile,
-        name, coin, cosingTime, city, address, nit
+        username, email, password, roleId, imgProfile,
+        nameBusiness, coin, cosingTime, city, address, nit
       } = datos;
 
-      const user = await Users.create({ username, email, password, dni, roleId, imgProfile });
-      const business = await Business.create({ name, coin, cosingTime, city, address, nit });
+      const user = await Users.create({ username, email, password, roleId, imgProfile });
+      const business = await Business.create({ name: nameBusiness, coin, cosingTime, city, address, nit, userId: user.id });
+      const cart = await Cart.create({userId: user.id})
 
-      return { user, business };
+      return { user, business, cart };
     } catch (error) {
       throw error;
     }
@@ -36,6 +37,13 @@ class UserServices {
             attributes: {
               exclude: ['createdAt', 'updatedAt']
             }
+          },
+          {
+            model: Business,
+            as: 'business',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt']
+            }
           }
         ]
       });
@@ -52,13 +60,14 @@ class UserServices {
           exclude: ['password', 'createdAt', 'updatedAt']
         }
       });
+    return result;
     } catch (error) {
       throw error;
     }
   }
-  static async updateUser(id, { username, imgProfile, dni }) {
+  static async updateUser(id, { username, imgProfile }) {
     try {
-      await Users.update({ username, imgProfile, dni }, { where: { id } });
+      await Users.update({ username, imgProfile }, { where: { id } });
       return { message: 'Usuario actualizado' };
     } catch (error) {
       throw error;
@@ -85,10 +94,10 @@ class UserServices {
     try {
       const promises = [
         Users.destroy({ where: { id } }),
-        Carts.destroy({ where: { id } }),
-        Products.destroy({ where: { id } }),
-        Business.destroy({ where: { id } }),
-        Orders.destroy({ where: { id } })
+        Cart.destroy({ where: { userId: id } }),
+        Products.destroy({ where: { userId: id } }),
+        Business.destroy({ where: { userId: id } }),
+        Order.destroy({ where: { userId: id } })
       ];
 
       await Promise.all(promises);

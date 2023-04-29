@@ -22,9 +22,6 @@ const bcrypt = require('bcrypt');
  *         password:
  *           type: string
  *           description: The password of the User.
- *         dni:
- *           type: string
- *           description: The Documento Nacional de Identidad of the User.
  *         imgProfile:
  *           type: string
  *           description: The photo of the User.
@@ -39,7 +36,6 @@ const bcrypt = require('bcrypt');
  *         username: 'User123'
  *         email: 'correo@email.com'
  *         password: 'abc123'
- *         dni: '1234567890'
  *         imgProfile: 'file of the photo'
  *         roleId: 1
  *         isVerify: false
@@ -49,7 +45,6 @@ const bcrypt = require('bcrypt');
  *         - username
  *         - email
  *         - password
- *         - dni
  *         - roleId
  *       properties:
  *         username:
@@ -62,9 +57,6 @@ const bcrypt = require('bcrypt');
  *         password:
  *           type: string
  *           description: The password of the User.
- *         dni:
- *           type: string
- *           description: The Documento Nacional de Identidad of the User.
  *         imgProfile:
  *           type: string
  *           description: The photo of the User.
@@ -75,7 +67,6 @@ const bcrypt = require('bcrypt');
  *         username: 'User123'
  *         email: 'correo@email.com'
  *         password: 'abc123'
- *         dni: '1234567890'
  *         imgProfile: 'file of the photo'
  *         roleId: 1
  */
@@ -108,10 +99,6 @@ const Users = db.define(
             validate: {
                 isAlphanumeric: true,
             },
-        },
-        dni: {
-            type: DataTypes.STRING,
-            unique: true,
         },
         imgProfile: {
             type: DataTypes.STRING,
