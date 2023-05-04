@@ -8,16 +8,6 @@ const ProductInOrder = db.define("productInOrder", {
     primaryKey: true,
     allowNull: false,
   },
-  orderId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: "order_id",
-  },
-  productId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: "product_id",
-  },
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,

@@ -118,8 +118,3 @@ const Products = db.define('product', {
 });
 
 module.exports = Products;
-
-/* 
-business_id
-created_by
-*/
