@@ -23,11 +23,11 @@ const initModels = () => {
   Users.hasMany(Orders, { as: 'ordenes', foreignKey: 'user_id' });
   Orders.belongsTo(Users, { as: 'usuario', foreignKey: 'user_id' });
 
-  //Roles.hasMany(Users, { as: 'usuarios', foreignKey: 'role_id' });
-  //Users.belongsTo(Roles, { as: 'rol', foreignKey: 'role_id' });
+  Roles.hasMany(Users, { as: 'usuarios', foreignKey: 'role_id' });
+  Users.belongsTo(Roles, { as: 'rol', foreignKey: 'role_id' });
 
-  //Roles.belongsTo(Item, { as: 'rubro', foreignKey: 'type_id' });
-  //Item.hasMany(Roles, { as: 'roles', foreignKey: 'type_id' });
+  Roles.belongsTo(Item, { as: 'rubro', foreignKey: 'type_id' });
+  Item.hasMany(Roles, { as: 'roles', foreignKey: 'type_id' });
 
   Business.hasMany(Products, { as: 'productos', foreignKey: 'business_id' });
   Products.belongsTo(Business, { as: 'negocio', foreignKey: 'business_id' });
