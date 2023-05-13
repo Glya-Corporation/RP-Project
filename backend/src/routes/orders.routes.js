@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const authenticate = require("../middlewares/auth.middleware");
+const { Router } = require('express');
+const authenticate = require('../middlewares/auth.middleware');
 const {
   getUserProducts,
   getUserOrders,
@@ -7,7 +7,7 @@ const {
   createNewProduct,
   addProductInCart,
   getProductsOrder
-} = require("../controllers");
+} = require('../controllers');
 
 /**
  * @openapi
@@ -42,13 +42,17 @@ const {
  */
 
 const router = Router();
-router.get("/products/:userId", authenticate, getUserProducts);
-router.get("/orders/:userId", getUserOrders);
-router.get("/carts/:userId", authenticate, getByUserProductsInCart);
-router.post("/product", authenticate, createNewProduct);
-router.post("/carts/:cartId/product", authenticate, addProductInCart);
-router.get("/orders/:oderId", getProductsOrder);
 
+router.get('/products/:userId', authenticate, getUserProducts);
 
+router.get('/orders/:userId', getUserOrders);
+
+router.get('/carts/:userId', authenticate, getByUserProductsInCart);
+
+router.post('/product', authenticate, createNewProduct);
+
+router.post('/carts/:cartId/product', authenticate, addProductInCart);
+
+router.get('/orders/:oderId', getProductsOrder);
 
 module.exports = router;

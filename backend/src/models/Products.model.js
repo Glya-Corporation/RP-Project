@@ -113,7 +113,8 @@ const Products = db.define('product', {
     type: DataTypes.STRING,
     validate: {
       isUrl: true
-    }
+    },
+    field: 'img_url'
   }
 });
 

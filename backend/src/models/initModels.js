@@ -5,43 +5,48 @@ const {
   Orders,
   ProductsInOrder,
   Products,
-  ProductsInCart
+  ProductsInCart,
+  Roles,
+  RolesCategories,
+  ProductsCategories
 } = require('./index');
 
 const initModels = () => {
-  Users.hasMany(Business, { as: 'negocios', foreignKey: 'user_id' });
-  Business.belongsTo(Users, { as: 'propietarios', foreignKey: 'user_id' });
+  Users.hasMany(Business, { as: 'companier', foreignKey: 'user_id' });
+  Business.belongsTo(Users, { as: 'owner', foreignKey: 'user_id' });
 
-  /* Un usuario puede tener muchos negocios favoritos, y un negocio puede ser favorito de muchos usuarios */
+  Users.belongsToMany(Business, { as: 'favBusinesses', through: 'business_favorites' });
+  Business.belongsToMany(Users, { as: 'favUsers', through: 'business_favorites' });
 
-  Users.belongsToMany(Business, { as: 'negocios favoritos', through: 'business_favorites' });
-  Business.belongsToMany(Users, { as: 'usuarios favoritos', through: 'business_favorites' });
+  Users.hasOne(Carts, { as: 'shoppingCart', foreignKey: 'user_id' });
+  Carts.belongsTo(Users, { as: 'owner', foreignKey: 'user_id' });
 
-  Users.hasOne(Carts, { as: 'carro de compras', foreignKey: 'user_id' });
-  Carts.belongsTo(Users, { as: 'propietario', foreignKey: 'user_id' });
+  Users.hasMany(Orders, { as: 'order', foreignKey: 'user_id' });
+  Orders.belongsTo(Users, { as: 'user', foreignKey: 'user_id' });
 
-  Users.hasMany(Orders, { as: 'ordenes', foreignKey: 'user_id' });
-  Orders.belongsTo(Users, { as: 'usuario', foreignKey: 'user_id' });
+  Roles.hasMany(Users, { as: 'user', foreignKey: 'role_id' });
+  Users.belongsTo(Roles, { as: 'role', foreignKey: 'role_id' });
 
-  Roles.hasMany(Users, { as: 'usuarios', foreignKey: 'role_id' });
-  Users.belongsTo(Roles, { as: 'rol', foreignKey: 'role_id' });
+  Roles.belongsTo(RolesCategories, { as: 'category', foreignKey: 'category_id' });
+  RolesCategories.hasMany(Roles, { as: 'roles', foreignKey: 'category_id' });
 
-  Roles.belongsTo(Item, { as: 'rubro', foreignKey: 'type_id' });
-  Item.hasMany(Roles, { as: 'roles', foreignKey: 'type_id' });
+  Business.hasMany(Products, { as: 'products', foreignKey: 'business_id' });
+  Products.belongsTo(Business, { as: 'business', foreignKey: 'business_id' });
 
-  Business.hasMany(Products, { as: 'productos', foreignKey: 'business_id' });
-  Products.belongsTo(Business, { as: 'negocio', foreignKey: 'business_id' });
+  ProductsCategories.hasMany(Products, { as: 'listProducts', foreignKey: 'category_id' });
+  Products.belongsTo(ProductsCategories, { as: 'category', foreignKey: 'category_id' });
 
-  Carts.hasMany(ProductsInCart, { as: 'producto en cart', foreignKey: 'cart_id' });
+  Carts.hasMany(ProductsInCart, { as: 'productoCart', foreignKey: 'cart_id' });
   ProductsInCart.belongsTo(Carts, { as: 'cart', foreignKey: 'cart_id' });
 
-  /* Una orden tiene muchos productos */
-  Orders.hasMany(ProductsInOrder, { as: 'producto en orden', foreignKey: 'order_id' });
+  Products.hasMany(ProductsInCart, { as: 'productsBuyng', foreignKey: 'product_id' });
+  ProductsInCart.belongsTo(Products, { as: 'products', foreignKey: 'product_id' });
+
+  Orders.hasMany(ProductsInOrder, { as: 'productOrder', foreignKey: 'order_id' });
   ProductsInOrder.belongsTo(Orders, { as: 'order', foreignKey: 'order_id' });
 
-  /* Un producto en orden pertenece a un producto, y un producto puede tenere muchos "P.I.O." */
-  Products.hasMany(ProductsInOrder, { as: 'ordenen de productos', foreignKey: 'product_id' });
-  ProductsInOrder.belongsTo(Products, { as: 'productos', foreignKey: 'product_id' });
+  Products.hasMany(ProductsInOrder, { as: 'orderProductsList', foreignKey: 'product_id' });
+  ProductsInOrder.belongsTo(Products, { as: 'product', foreignKey: 'product_id' });
 };
 
 module.exports = initModels;

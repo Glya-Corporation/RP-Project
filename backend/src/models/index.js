@@ -2,10 +2,13 @@ const Users = require('./Users.model');
 const Business = require('./Business.model');
 const BusinessFavorites = require('./BusinessFavorites.model');
 const Products = require('./Products.model');
-const Carts = require('./Carts.models');
-const ProductsInCart = require('./ProductsInCart.models');
+const Carts = require('./Carts.model');
+const ProductsInCart = require('./ProductsInCart.model');
 const Orders = require('./Orders.model');
-const ProductsInOrder = require('./ProductsInOrder.models');
+const ProductsInOrder = require('./ProductsInOrder.model');
+const Roles = require('./Roles.model');
+const RolesCategories = require('./RolesCategories.model');
+const ProductsCategories = require('./ProductsCategories.model');
 
 module.exports = {
   Users,
@@ -15,5 +18,8 @@ module.exports = {
   Carts,
   ProductsInCart,
   Orders,
-  ProductsInOrder
+  ProductsInOrder,
+  Roles,
+  RolesCategories,
+  ProductsCategories
 };

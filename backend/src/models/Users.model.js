@@ -72,55 +72,60 @@ const bcrypt = require('bcrypt');
  */
 
 const Users = db.define(
-    'users',
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-            allowNull: false,
-        },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: false,
-            validate: {
-                isEmail: true,
-            },
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isAlphanumeric: true,
-            },
-        },
-        imgProfile: {
-            type: DataTypes.STRING,
-            validate: {
-                isUrl: true,
-            },
-            field: 'img_profile',
-        },
-        isVerify: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
+  'users',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false
     },
-    {
-        hooks: {
-            beforeCreate: (user, options) => {
-                const { password } = user;
-                const hash = bcrypt.hashSync(password, 8);
-                user.password = hash;
-            },
-        },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true
+      }
+    },
+    imgProfile: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: true
+      },
+      field: 'img_profile'
+    },
+    isVerify: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    isClientFinal: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      field:'is_client_final'
     }
+  },
+  {
+    hooks: {
+      beforeCreate: (user, options) => {
+        const { password } = user;
+        const hash = bcrypt.hashSync(password, 8);
+        user.password = hash;
+      }
+    }
+  }
 );
 
 module.exports = Users;
