@@ -1,5 +1,6 @@
+const AuthServices = require('./auth.service.js')
+const UserServices = require('./user.services.js');
+const ProdustServices = require('./produst.services.js');
 
-const nameData = require('./');
 
-
-module.exports = { allConsts };
+module.exports = { AuthServices, UserServices, ProdustServices };

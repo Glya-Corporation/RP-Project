@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
