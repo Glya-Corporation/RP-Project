@@ -10,49 +10,77 @@ const {
 } = require('../controllers');
 
 /**
- * @openapi
- * /api/v1/orders/{id}:
- *   get:
- *     security:
- *       - bearerAuth: []
- *     summary: Get all orders from user
- *     tags: [Orders]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *           minimum: 1
- *         description: user Id
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: OK
- *                 data:
- *                   type: array
- *                   items: {}
- */
+* @openapi
+* /api/v1/order/{id}:
+*   get:
+*     security:
+*       - bearerAuth: []
+*     summary: Get a order by id
+*     tags: [Order]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: integer
+*         required: true
+*         description: The order id
+*     responses:
+*       200:
+*         description: The order was successfully found
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Order'
+* /api/v1/orders/user/{id}:
+*   get:
+*     security:
+*       - bearerAuth: []
+*     summary: Get all order by order id.
+*     tags: [Order]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: integer
+*         required: true
+*         description: The order id
+*     responses:
+*       200:
+*         description: The order was successfully found
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Order'
+* /api/v1/order/{id}/delete:
+*   delete:
+*     security:
+*       - bearerAuth: []
+*     summary: Delete a order by id
+*     tags: [Order]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: integer
+*         required: true
+*         description: The order id
+*     responses:
+*       200:
+*         description: The order was successfully deleted
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/DeletedMessage'
+*/
 
 const router = Router();
 
-router.get('/products/:userId', authenticate, getUserProducts);
+router.get('/order/user/:id', getUserOrders);
 
-router.get('/orders/:userId', getUserOrders);
+router.get('/orders/user/:id', authenticate, getByUserProductsInCart);
 
-router.get('/carts/:userId', authenticate, getByUserProductsInCart);
-
-router.post('/product', authenticate, createNewProduct);
-
-router.post('/carts/:cartId/product', authenticate, addProductInCart);
-
-router.get('/orders/:oderId', getProductsOrder);
+router.delete('/order/:id/delete', getProductsOrder);
 
 module.exports = router;

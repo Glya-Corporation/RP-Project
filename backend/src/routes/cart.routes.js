@@ -10,8 +10,8 @@ const router = Router();
 *   get:
 *     security:
 *       - bearerAuth: []
-*     summary: Get a cart by id
-*     tags: [name tags]
+*     summary: Get a cart by id.
+*     tags: [Cart]
 *     parameters:
 *       - in: path
 *         name: id
@@ -25,13 +25,15 @@ const router = Router();
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/Cart'
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Cart'
 * /api/v1/cart/{id}/update:
 *   put:
 *     security:
 *       - bearerAuth: []
 *     summary: Update a cart by id
-*     tags: [name tags]
+*     tags: [Cart]
 *     requestBody:
 *       required: true
 *       content:
@@ -52,12 +54,12 @@ const router = Router();
 *           application/json:
 *             schema:
 *               $ref: '#/components/schemas/UpdatedMessage'
-* /api/v1/{id}/delete:
-*   delete:
+* /api/v1/cart/{id}/buy:
+*   put:
 *     security:
 *       - bearerAuth: []
-*     summary: Delete a cart by id
-*     tags: [name tags]
+*     summary: Buy a cart by id
+*     tags: [Cart]
 *     parameters:
 *       - in: path
 *         name: id
@@ -67,17 +69,17 @@ const router = Router();
 *         description: The cart id
 *     responses:
 *       200:
-*         description: The cart was successfully deleted
+*         description: The cart was successfully updated
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/DeletedMessage'
+*               $ref: '#/components/schemas/UpdatedMessage'
 */
 
 router.get('/cart/:id', authenticate, getCart);
 
 router.put('/cart/:id/update', authenticate, updateCart);
 
-router.delete('/cart/:id/delete', authenticate, deleteCart);
+router.put('/cart/:id/buy', authenticate, buyCart);
 
 module.exports = router;
