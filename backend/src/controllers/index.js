@@ -1,4 +1,19 @@
 const {
+  createBusiness,
+  getBusiness,
+  getAllBusiness,
+  updateBusiness,
+  deleteBusiness
+} = require('./business.controllers.js');
+
+const {
+  createFavorites,
+  getFavorites,
+  getAllFavorites,
+  deleteFavorites
+} = require('./businessFavorites.controllers.js');
+
+const {
   createUser,
   getUser,
   getAllUsersByRole,
@@ -16,16 +31,13 @@ const {
 } = require('./products.controller.js');
 
 module.exports = {
-  createUser,
-  getUser,
-  getAllUsersByRole,
-  updateUser,
-  verifyUser,
-  updatePasswordUser,
-  deleteUser,
-  createProducts,
-  getProduct,
-  getAllProductsByBusiness,
-  updateProduct,
-  deleteProduct
+  createBusiness,
+  getBusiness,
+  getAllBusiness,
+  updateBusiness,
+  deleteBusiness,
+  createFavorites,
+  getFavorites,
+  getAllFavorites,
+  deleteFavorites
 };

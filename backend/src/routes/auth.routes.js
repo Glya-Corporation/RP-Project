@@ -23,7 +23,7 @@ const router = Router();
 *                 type: string
 *                 description: Password
 *             example:
-*               username: "example@gmail.com"
+*               username: "name123"
 *               password: "123123"
 *     responses:
 *       200:

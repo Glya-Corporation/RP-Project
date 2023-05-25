@@ -4,7 +4,19 @@ const cors = require('cors');
 const db = require('./utils/database');
 const hendleError = require('./middlewares/error.middleware');
 const initModels = require('./models/initModels');
-const { UserRoutes, ProductRoutes } = require('./routes');
+const {
+  AuthRoutes,
+  BusinessRoutes,
+  BusinessFavoritesRoutes,
+  Cart,
+  OrdersRoutes,
+  ProductRoutes,
+  ProductsCategoriesRoutes,
+  ProductsInCartRoutes,
+  RolesRoutes,
+  RolesCategoriesRoutes,
+  UserRoutes
+} = require('./routes');
 
 const app = express();
 
@@ -31,8 +43,17 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/v1', UserRoutes);
+app.use('/api/v1', AuthRoutes);
+app.use('/api/v1', BusinessRoutes);
+app.use('/api/v1', BusinessFavoritesRoutes);
+app.use('/api/v1', Cart);
+app.use('/api/v1', OrdersRoutes);
 app.use('/api/v1', ProductRoutes);
+app.use('/api/v1', ProductsCategoriesRoutes);
+app.use('/api/v1', ProductsInCartRoutes);
+app.use('/api/v1', RolesRoutes);
+app.use('/api/v1', RolesCategoriesRoutes);
+app.use('/api/v1', UserRoutes);
 
 app.use(hendleError);
 
