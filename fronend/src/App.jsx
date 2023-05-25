@@ -1,15 +1,23 @@
 /* eslint-disable no-undef */
-import "./App.css";
+
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Register from "./routes/register";
-import User from "./routes/user";
+import LoadingScreen from "./components/LoadingScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { getProvThunk } from "./store/slices/localizacion.slice";
+import { useEffect } from "react";
 function App() {
+  const isLoading = useSelector((state) => state.isLoading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProvThunk());
+  }, []);
   return (
     <HashRouter>
+      {isLoading && <LoadingScreen />}
       <Routes>
         <Route path="/" element={""} />
         <Route path="/register" element={<Register />} />
-        <Route path="/user/:id/profile" element={<User />} />
       </Routes>
     </HashRouter>
   );
