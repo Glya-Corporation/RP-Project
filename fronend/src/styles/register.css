@@ -1,0 +1,275 @@
+/* eslint-disable */
+
+:root {
+  --button-bg-color: hsla(0, 57%, 54%, 0.6);
+  --button-bg-color-hover: hsla(0, 57%, 54%, 1);
+  --button-w: 400px;
+  --button-w-mobile: 300px;
+  --text-color: #6d6d6d;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 100vw;
+  color: var(--text-color);
+
+  padding-top: 4rem;
+}
+.content-form {
+  width: 100%;
+
+  overflow: hidden;
+}
+
+form {
+  display: flex;
+  min-width: 400%;
+  transition: margin-left 0.4s ease-out;
+}
+form .pagina {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 25%;
+  margin-bottom: 1rem;
+}
+
+.content-rol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 0 4rem 0;
+  width: 100%;
+}
+.button-rol {
+  background-color: var(--button-bg-color);
+  border: none;
+  width: 100%;
+  max-width: var(--button-w);
+
+  height: 90px;
+  border-radius: 10px;
+}
+
+.button-rol:hover,
+.button-rol:focus {
+  transition: 1s;
+  background-color: var(--button-bg-color-hover);
+  color: white;
+}
+.button-next {
+  background-color: var(--button-bg-color-hover);
+  height: 45px;
+  width: 100%;
+  max-width: var(--button-w);
+  border: none;
+  border-radius: 25px;
+  color: white;
+}
+
+.form-control {
+  display: flex !important;
+  text-align: left;
+  flex-direction: column;
+  align-items: center;
+  border: none !important;
+}
+.form-control label {
+  width: 100%;
+  max-width: 400px;
+}
+.form-control input {
+  border: 1px solid lightgrey;
+  margin-left: 2px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 400px;
+  height: 49px;
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 350;
+  outline: none;
+}
+
+/*------terminos y condiciones*/
+.tyc {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+}
+.tyc .tyc-text {
+  font-size: 13px;
+}
+.switch {
+  width: 70px;
+  height: 30px;
+  border: 1px solid #737373;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 17px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.switch[data-isOn="true"] {
+  justify-content: flex-end;
+}
+.switch[data-isOn="true"] .handle {
+  background-color: rgb(70, 98, 158);
+  transition: 0.3s;
+}
+
+.handle {
+  width: 20px;
+  height: 20px;
+  background-color: var(--button-bg-color-hover);
+  border-radius: 40px;
+}
+
+/*--------------------------*/
+/*cuit*/
+.tipo-cuit {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+}
+.tipo-cuit select {
+  border: 1px solid lightgrey;
+  margin-left: 2px;
+  border-radius: 25px;
+  width: 30% !important;
+  height: 49px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 350;
+  outline: none;
+}
+/*-------------------------*/
+.form-control select {
+  border: 1px solid lightgrey;
+  margin-left: 2px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 400px;
+  height: 49px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 350;
+  outline: none;
+}
+/*-----texto direcion facturacion--------*/
+.direcf {
+  width: 400px;
+}
+.direcf p {
+  text-align: end;
+  font-size: 13px;
+}
+/*-------------------------*/
+
+.form-control .ducumentacion {
+  border-style: dashed;
+  border-color: rgb(172, 171, 171);
+  border-width: 1px;
+  height: 152px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+}
+.icono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 24px;
+}
+
+/*barra de progreso*/
+.content-progres {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+.progress-bar {
+  display: flex;
+  width: 350px;
+
+  flex-direction: row !important;
+
+  margin: 40px 0;
+}
+.progress-bar .paso {
+  text-align: center;
+  width: 100%;
+}
+.progress-bar .paso .num {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--button-bg-color);
+}
+
+.mostrar-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  width: 200%;
+}
+.pagina-rol {
+  width: 50%;
+}
+/*-------------------------*/
+@media (max-width: 576px) {
+  .form-control input,
+  .form-control select {
+    align-self: start;
+  }
+  .tipo-cuit {
+    align-self: flex-start;
+  }
+  .tyc {
+    width: 95%;
+    padding-right: 1rem;
+  }
+
+  .tyc-tex {
+    text-align: start;
+  }
+  .switch {
+    width: 60px;
+    height: 25px;
+  }
+  .handle {
+    width: 17px;
+    height: 17px;
+    background-color: var(--button-bg-color-hover);
+  }
+  .direcf {
+    width: 85%;
+    padding-right: 1.6rem;
+  }
+  .form-control .ducumentacion {
+    border-style: dashed;
+    border-color: rgb(172, 171, 171);
+    border-width: 1px;
+    height: 152px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 24px;
+    align-self: center;
+  }
+}
