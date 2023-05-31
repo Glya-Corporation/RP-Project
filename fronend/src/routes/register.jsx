@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 
 import "../styles/register.css";
-import RegistrationForm from "../components/FormComerciante";
+
+import SelectRol from "../components/SelectRol";
 
 const Register = () => {
   /*---------------- */
@@ -12,7 +13,8 @@ const Register = () => {
   return (
     <div className="container">
       <h1>Crear cuenta</h1>
-      <RegistrationForm />
+
+      <SelectRol />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import "../styles/register.css";
 import { useSelector } from "react-redux";
 import Example from "./registroExitoso";
 
-const RegistrationForm = ({ rol }) => {
+const RegistroFormUser = ({ rol }) => {
   /*provincias */
   const provincia = useSelector((state) => state.location);
 
@@ -64,11 +64,6 @@ const RegistrationForm = ({ rol }) => {
           <div className="paso medio">
             <div id="dos" className="num">
               2
-            </div>
-          </div>
-          <div className="paso">
-            <div id="tres" className="num">
-              3
             </div>
           </div>
         </div>
@@ -146,7 +141,7 @@ const RegistrationForm = ({ rol }) => {
         </div>
         <div className="pagina">
           {" "}
-          <div className="titulo">Datos de comercio</div>
+          <div className="titulo">Datos personales</div>
           <div className="form-control">
             <label> Nombre de comercio:</label>
             <input
@@ -160,7 +155,7 @@ const RegistrationForm = ({ rol }) => {
             <label> Tipo de documento:</label>
             <div className="tipo-cuit">
               <select name="tipoDocumento" onChange={handleInputChange}>
-                <option value="cuit">CUIT</option>
+                <option value="dni">DNI</option>
               </select>
 
               <input
@@ -172,18 +167,11 @@ const RegistrationForm = ({ rol }) => {
           </div>
           <br />
           <div className="form-control">
-            <label> Tipo de negocio:</label>
-            <select name="tipoDeNegocio" onChange={handleInputChange}>
-              <option value="autoservicio">Autoservicio</option>
-              <option value="opcion2">opcion2</option>
-              <option value="opcion3">opcion3</option>
-              <option value="opcion4">opcion4</option>
-            </select>
-          </div>
-          <br />
-          <div className="form-control">
             <label> Provincia:</label>
             <select name="provincia" onChange={handleInputChange}>
+              <option defaultValue={"true"} value="#">
+                seleccione una opcion
+              </option>
               {provincia.map((e) => (
                 <option key={e.id} value={e.nombre}>
                   {e.nombre}
@@ -201,61 +189,8 @@ const RegistrationForm = ({ rol }) => {
             />
           </div>
           <br />
-          <div className="form-control">
-            <label> Dirección de facturación:</label>
-            <input
-              type="text"
-              name="direccionFacturacion"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-control">
-            <div className="direcf">
-              <p>
-                Tu dirección de facturación debe ser igual que la dirección del
-                negocio{" "}
-              </p>
-            </div>
-          </div>
-          <br />
-          <div className="form-control">
-            <button
-              className="button-next "
-              type="button"
-              onClick={() => handleNextPart()}
-            >
-              Siguiente
-            </button>
-          </div>
-        </div>
-        <div className="pagina">
-          {" "}
-          <div className="titulo">Documentos</div>
           <div className="form-control docum">
-            <label> Constancia de AFIP:</label>
-            <div className="ducumentacion">
-              <input
-                style={{ display: "none" }}
-                type="file"
-                id="constancia"
-                name="constanciaAFIP"
-                onChange={handleFileChange}
-              />
-              <button
-                onClick={() => selectFile("constancia")}
-                type="button"
-                className="icono"
-              >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
-                subir archivo
-              </button>
-            </div>
-          </div>
-          <br />
-          <div className="form-control docum">
-            <label> Imagen de tu documento de identidad (frente):</label>
+            <label> Foto de perfil:</label>
             <div className="ducumentacion">
               <input
                 style={{ display: "none" }}
@@ -277,37 +212,6 @@ const RegistrationForm = ({ rol }) => {
             </div>
           </div>
           <br />
-          <div className="form-control docum">
-            <label> Imagen de tu documento de identidad (dorso):</label>
-            <div className="ducumentacion">
-              <input
-                style={{ display: "none" }}
-                type="file"
-                id="dniDorso"
-                name="imagenDniDorso"
-                onChange={handleFileChange}
-              />
-              <button
-                onClick={() => selectFile("dniDorso")}
-                type="button"
-                className="icono"
-              >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
-                subir archivo
-              </button>
-            </div>
-          </div>
-          <br />
-          <div className="form-control docum">
-            <label> Tipo de persona:</label>
-            <select name="tipoPersona" onChange={handleInputChange}>
-              <option value="opcion1">Opción 1</option>
-              <option value="opcion2">Opción 2</option>
-            </select>
-          </div>
-          <br />
           <div className="form-control">
             <button
               className="button-next "
@@ -324,4 +228,4 @@ const RegistrationForm = ({ rol }) => {
   );
 };
 
-export default RegistrationForm;
+export default RegistroFormUser;

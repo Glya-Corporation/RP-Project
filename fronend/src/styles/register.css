@@ -4,20 +4,25 @@
   --button-bg-color: hsla(0, 57%, 54%, 0.6);
   --button-bg-color-hover: hsla(0, 57%, 54%, 1);
   --button-w: 400px;
+  --button-w-mobile: 300px;
+  --text-color: #6d6d6d;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   text-align: center;
-  min-width: 100%;
+  min-width: 100vw;
+  color: var(--text-color);
 
   padding-top: 4rem;
 }
 .content-form {
   width: 100%;
+
   overflow: hidden;
 }
+
 form {
   display: flex;
   min-width: 400%;
@@ -28,19 +33,23 @@ form .pagina {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  min-width: 25%;
+  width: 25%;
+  margin-bottom: 1rem;
 }
 
 .content-rol {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
   padding: 1.2rem 0 4rem 0;
+  width: 100%;
 }
 .button-rol {
   background-color: var(--button-bg-color);
   border: none;
-  width: var(--button-w);
+  width: 100%;
+  max-width: var(--button-w);
 
   height: 90px;
   border-radius: 10px;
@@ -55,11 +64,13 @@ form .pagina {
 .button-next {
   background-color: var(--button-bg-color-hover);
   height: 45px;
-  width: var(--button-w);
+  width: 100%;
+  max-width: var(--button-w);
   border: none;
   border-radius: 25px;
   color: white;
 }
+
 .form-control {
   display: flex !important;
   text-align: left;
@@ -68,15 +79,18 @@ form .pagina {
   border: none !important;
 }
 .form-control label {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .form-control input {
   border: 1px solid lightgrey;
   margin-left: 2px;
   border-radius: 25px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 49px;
   text-align: center;
+
   font-size: 18px;
   font-weight: 350;
   outline: none;
@@ -85,7 +99,8 @@ form .pagina {
 /*------terminos y condiciones*/
 .tyc {
   display: flex;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .tyc .tyc-text {
   font-size: 13px;
@@ -121,7 +136,8 @@ form .pagina {
 /*cuit*/
 .tipo-cuit {
   display: flex;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .tipo-cuit select {
   border: 1px solid lightgrey;
@@ -139,7 +155,8 @@ form .pagina {
   border: 1px solid lightgrey;
   margin-left: 2px;
   border-radius: 25px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 49px;
   text-align: center;
   font-size: 16px;
@@ -161,7 +178,8 @@ form .pagina {
   border-color: rgb(172, 171, 171);
   border-width: 1px;
   height: 152px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   border-radius: 24px;
 }
 .icono {
@@ -203,4 +221,55 @@ form .pagina {
   background-color: var(--button-bg-color);
 }
 
+.mostrar-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  width: 200%;
+}
+.pagina-rol {
+  width: 50%;
+}
 /*-------------------------*/
+@media (max-width: 576px) {
+  .form-control input,
+  .form-control select {
+    align-self: start;
+  }
+  .tipo-cuit {
+    align-self: flex-start;
+  }
+  .tyc {
+    width: 95%;
+    padding-right: 1rem;
+  }
+
+  .tyc-tex {
+    text-align: start;
+  }
+  .switch {
+    width: 60px;
+    height: 25px;
+  }
+  .handle {
+    width: 17px;
+    height: 17px;
+    background-color: var(--button-bg-color-hover);
+  }
+  .direcf {
+    width: 85%;
+    padding-right: 1.6rem;
+  }
+  .form-control .ducumentacion {
+    border-style: dashed;
+    border-color: rgb(172, 171, 171);
+    border-width: 1px;
+    height: 152px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 24px;
+    align-self: center;
+  }
+}
