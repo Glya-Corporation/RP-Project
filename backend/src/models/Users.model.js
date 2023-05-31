@@ -80,6 +80,11 @@ const Users = db.define(
       primaryKey: true,
       allowNull: false
     },
+    fullName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'full_name'
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -114,7 +119,7 @@ const Users = db.define(
     isClientFinal: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      field:'is_client_final'
+      field: 'is_client_final'
     }
   },
   {

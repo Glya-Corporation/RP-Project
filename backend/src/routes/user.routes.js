@@ -172,7 +172,7 @@ const router = Router();
  *                   example: 'Deleted successfull'
  */
 
-router.post('/user/register', authenticate, createUser);
+router.post('/user/register', createUser);
 
 router.get('/user/:id', authenticate, getUser);
 

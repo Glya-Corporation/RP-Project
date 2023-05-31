@@ -1,16 +1,16 @@
-const { Users } = require('../models');
+const { Users, Carts, Business } = require('../models');
 
 class UserServices {
   static async createUser(datos) {
     try {
       const {
-        username, email, password, roleId, imgProfile,
-        nameBusiness, coin, cosingTime, city, address, nit
+        fullName, username, email, password, roleId, imgProfile, number, isClientFinal,
+        nameBusiness, city, address, nit
       } = datos;
 
-      const user = await Users.create({ username, email, password, roleId, imgProfile });
-      const business = await Business.create({ name: nameBusiness, coin, cosingTime, city, address, nit, userId: user.id });
-      const cart = await Cart.create({userId: user.id})
+      const user = await Users.create({ fullName, username, email, password, roleId, imgProfile, number, isClientFinal });
+      const business = await Business.create({ name: nameBusiness, city, address, nit, userId: user.id });
+      const cart = await Carts.create({userId: user.id})
 
       return { user, business, cart };
     } catch (error) {

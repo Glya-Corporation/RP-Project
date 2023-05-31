@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createPic, getPic, getAllPic, updatePic, deletePic } = require('../controllers');
+const { createPic, updatePic, deletePic } = require('../controllers');
 const { authenticate } = require('../middlewares/auth.middleware');
 
 const router = Router();
