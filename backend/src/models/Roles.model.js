@@ -17,7 +17,8 @@ const Roles = db.define('roles', {
     }
   },
   description: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   categoryId: {
     type: DataTypes.INTEGER,

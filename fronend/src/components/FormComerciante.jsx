@@ -1,52 +1,52 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import "../styles/register.css";
-import { useSelector } from "react-redux";
-import Example from "./registroExitoso";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import '../styles/register.css';
+import { useSelector } from 'react-redux';
+import Example from './registroExitoso';
 
 const RegistrationForm = ({ rol }) => {
   /*provincias */
-  const provincia = useSelector((state) => state.location);
+  const provincia = useSelector(state => state.location);
 
   /*-------- */
 
   const [formData, setFormData] = useState(new FormData());
-  const [modal, setModal] = useState("");
+  const [modal, setModal] = useState('');
 
   /*-----seleccionar archivo */
-  const selectFile = (file) => {
+  const selectFile = file => {
     document.getElementById(file).click();
   };
 
   /*--------------- */
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
     formData.set(name, value);
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = event => {
     const { name, files } = event.target;
     formData.set(name, files[0]);
   };
   const [pagina, setPagina] = useState(100);
   const handleNextPart = () => {
-    const formu = document.getElementById("formu");
+    const formu = document.getElementById('formu');
     setPagina(pagina + 100);
-    formu.style.marginLeft = "-" + pagina + "%";
+    formu.style.marginLeft = '-' + pagina + '%';
   };
   const [isOn, setIsOn] = useState(false);
 
   const toggleSwitch = () => setIsOn(!isOn);
   const spring = {
-    type: "spring",
+    type: 'spring',
     stiffness: 700,
-    damping: 30,
+    damping: 30
   };
   const handleSubmit = () => {
-    setModal("xxl-down");
-    formData.append("rol", rol);
+    setModal('xxl-down');
+    formData.append('rol', rol);
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}, ${pair[1]}`);
     }
@@ -57,17 +57,26 @@ const RegistrationForm = ({ rol }) => {
       <div className="content-progres">
         <div className="progress-bar">
           <div className="paso">
-            <div id="uno" className="num">
+            <div
+              id="uno"
+              className="num"
+            >
               1
             </div>
           </div>
           <div className="paso medio">
-            <div id="dos" className="num">
+            <div
+              id="dos"
+              className="num"
+            >
               2
             </div>
           </div>
           <div className="paso">
-            <div id="tres" className="num">
+            <div
+              id="tres"
+              className="num"
+            >
               3
             </div>
           </div>
@@ -77,7 +86,7 @@ const RegistrationForm = ({ rol }) => {
         <div className="pagina">
           <div className="titulo">Datos personales</div>
           <div className="form-control">
-            {" "}
+            {' '}
             <label> Nombre y apellido:</label>
             <input
               type="text"
@@ -88,17 +97,29 @@ const RegistrationForm = ({ rol }) => {
           <br />
           <div className="form-control">
             <label> Username:</label>
-            <input type="text" name="username" onChange={handleInputChange} />
+            <input
+              type="text"
+              name="username"
+              onChange={handleInputChange}
+            />
           </div>
           <br />
           <div className="form-control">
             <label> Correo electrónico:</label>
-            <input type="email" name="email" onChange={handleInputChange} />
+            <input
+              type="email"
+              name="email"
+              onChange={handleInputChange}
+            />
           </div>
           <br />
           <div className="form-control">
             <label> Teléfono:</label>
-            <input type="tel" name="telefono" onChange={handleInputChange} />
+            <input
+              type="tel"
+              name="telefono"
+              onChange={handleInputChange}
+            />
           </div>
           <br />
           <div className="form-control">
@@ -122,15 +143,20 @@ const RegistrationForm = ({ rol }) => {
           <div className="tyc">
             <div className="tyc-text">
               <p>
-                Acepto{" "}
-                <a href="#">
-                  términos y condiciones generales y política de privacidad
-                </a>{" "}
-                de Unimarket.
+                Acepto <a href="#">términos y condiciones generales y política de privacidad</a> de
+                Unimarket.
               </p>
             </div>
-            <div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
-              <motion.div className="handle" layout transition={spring} />
+            <div
+              className="switch"
+              data-isOn={isOn}
+              onClick={toggleSwitch}
+            >
+              <motion.div
+                className="handle"
+                layout
+                transition={spring}
+              />
             </div>
           </div>
 
@@ -145,7 +171,7 @@ const RegistrationForm = ({ rol }) => {
           </div>
         </div>
         <div className="pagina">
-          {" "}
+          {' '}
           <div className="titulo">Datos de comercio</div>
           <div className="form-control">
             <label> Nombre de comercio:</label>
@@ -159,7 +185,10 @@ const RegistrationForm = ({ rol }) => {
           <div className="form-control">
             <label> Tipo de documento:</label>
             <div className="tipo-cuit">
-              <select name="tipoDocumento" onChange={handleInputChange}>
+              <select
+                name="tipoDocumento"
+                onChange={handleInputChange}
+              >
                 <option value="cuit">CUIT</option>
               </select>
 
@@ -173,7 +202,10 @@ const RegistrationForm = ({ rol }) => {
           <br />
           <div className="form-control">
             <label> Tipo de negocio:</label>
-            <select name="tipoDeNegocio" onChange={handleInputChange}>
+            <select
+              name="tipoDeNegocio"
+              onChange={handleInputChange}
+            >
               <option value="autoservicio">Autoservicio</option>
               <option value="opcion2">opcion2</option>
               <option value="opcion3">opcion3</option>
@@ -183,9 +215,15 @@ const RegistrationForm = ({ rol }) => {
           <br />
           <div className="form-control">
             <label> Provincia:</label>
-            <select name="provincia" onChange={handleInputChange}>
-              {provincia.map((e) => (
-                <option key={e.id} value={e.nombre}>
+            <select
+              name="provincia"
+              onChange={handleInputChange}
+            >
+              {provincia.map(e => (
+                <option
+                  key={e.id}
+                  value={e.nombre}
+                >
                   {e.nombre}
                 </option>
               ))}
@@ -211,10 +249,7 @@ const RegistrationForm = ({ rol }) => {
           </div>
           <div className="form-control">
             <div className="direcf">
-              <p>
-                Tu dirección de facturación debe ser igual que la dirección del
-                negocio{" "}
-              </p>
+              <p>Tu dirección de facturación debe ser igual que la dirección del negocio </p>
             </div>
           </div>
           <br />
@@ -229,26 +264,24 @@ const RegistrationForm = ({ rol }) => {
           </div>
         </div>
         <div className="pagina">
-          {" "}
+          {' '}
           <div className="titulo">Documentos</div>
           <div className="form-control docum">
             <label> Constancia de AFIP:</label>
             <div className="ducumentacion">
               <input
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 type="file"
                 id="constancia"
                 name="constanciaAFIP"
                 onChange={handleFileChange}
               />
               <button
-                onClick={() => selectFile("constancia")}
+                onClick={() => selectFile('constancia')}
                 type="button"
                 className="icono"
               >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
+                <span className="material-symbols-outlined">drive_folder_upload</span>
                 subir archivo
               </button>
             </div>
@@ -258,20 +291,18 @@ const RegistrationForm = ({ rol }) => {
             <label> Imagen de tu documento de identidad (frente):</label>
             <div className="ducumentacion">
               <input
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 id="dniFrente"
                 type="file"
                 name="imagenDniFrente"
                 onChange={handleFileChange}
               />
               <button
-                onClick={() => selectFile("dniFrente")}
+                onClick={() => selectFile('dniFrente')}
                 type="button"
                 className="icono"
               >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
+                <span className="material-symbols-outlined">drive_folder_upload</span>
                 subir archivo
               </button>
             </div>
@@ -281,20 +312,18 @@ const RegistrationForm = ({ rol }) => {
             <label> Imagen de tu documento de identidad (dorso):</label>
             <div className="ducumentacion">
               <input
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 type="file"
                 id="dniDorso"
                 name="imagenDniDorso"
                 onChange={handleFileChange}
               />
               <button
-                onClick={() => selectFile("dniDorso")}
+                onClick={() => selectFile('dniDorso')}
                 type="button"
                 className="icono"
               >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
+                <span className="material-symbols-outlined">drive_folder_upload</span>
                 subir archivo
               </button>
             </div>
@@ -302,7 +331,10 @@ const RegistrationForm = ({ rol }) => {
           <br />
           <div className="form-control docum">
             <label> Tipo de persona:</label>
-            <select name="tipoPersona" onChange={handleInputChange}>
+            <select
+              name="tipoPersona"
+              onChange={handleInputChange}
+            >
               <option value="opcion1">Opción 1</option>
               <option value="opcion2">Opción 2</option>
             </select>
@@ -318,7 +350,7 @@ const RegistrationForm = ({ rol }) => {
             </button>
           </div>
         </div>
-      </form>{" "}
+      </form>{' '}
       <Example modal={modal} />
     </div>
   );

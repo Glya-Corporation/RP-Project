@@ -13,14 +13,9 @@ const Carts = db.define('cart', {
     allowNull: false,
     field: 'user_id'
   },
-  ordersId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'orders_id'
-  },
   totalPrice: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
     field: 'total_price'
   }
 });

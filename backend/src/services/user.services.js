@@ -1,14 +1,14 @@
-const { Users, Carts, Business } = require('../models');
+const { Users, Carts, Business, Roles } = require('../models');
 
 class UserServices {
   static async createUser({ user, business }) {
     try {
       const userCreated = await Users.create(user);
       const cart = await Carts.create({ userId: userCreated.id });
-      let business = null;
-      if (business) business = await Business.create({ ...business, userId: userCreated.id });
+      let businessCreated = null;
+      if (business && !user.isClientFinal) businessCreated = await Business.create({ ...business, userId: userCreated.id });
 
-      return { user: { ...userCreated, cart }, business };
+      return { userCreated, cart, businessCreated };
     } catch (error) {
       throw error;
     }
@@ -17,28 +17,21 @@ class UserServices {
     try {
       const result = await Users.findByPk(id, {
         attributes: {
-          exclude: ['password']
+          exclude: ['password', 'role_id', 'roleId', 'createdAt', 'updatedAt']
         },
         include: [
+          {
+            model: Carts,
+            as: 'shoppingCart',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt', 'user_id', 'userId']
+            }
+          },
           {
             model: Roles,
             as: 'role',
             attributes: {
-              exclude: ['createdAt', 'updatedAt']
-            }
-          },
-          {
-            model: Cart,
-            as: 'cart',
-            attributes: {
-              exclude: ['createdAt', 'updatedAt']
-            }
-          },
-          {
-            model: Business,
-            as: 'business',
-            attributes: {
-              exclude: ['createdAt', 'updatedAt']
+              exclude: ['createdAt', 'updatedAt', 'category_id', 'categoryId']
             }
           }
         ]
@@ -88,13 +81,7 @@ class UserServices {
   }
   static async deleteUser(id) {
     try {
-      const promises = [
-        Users.destroy({ where: { id } }),
-        Cart.destroy({ where: { userId: id } }),
-        Products.destroy({ where: { userId: id } }),
-        Business.destroy({ where: { userId: id } }),
-        Order.destroy({ where: { userId: id } })
-      ];
+      const promises = [Users.destroy({ where: { id } }), Cart.destroy({ where: { userId: id } }), Products.destroy({ where: { userId: id } }), Business.destroy({ where: { userId: id } }), Order.destroy({ where: { userId: id } })];
 
       await Promise.all(promises);
       return { message: 'Usuario eliminador exitosamente' };

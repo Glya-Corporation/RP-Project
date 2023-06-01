@@ -15,8 +15,6 @@ const router = Router();
  * @openapi
  * /api/v1/user/register:
  *   post:
- *     security:
- *       - bearerAuth: []
  *     summary: Create a user.
  *     tags: [User]
  *     requestBody:

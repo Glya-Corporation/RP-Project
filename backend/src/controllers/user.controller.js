@@ -7,13 +7,18 @@ const createUser = async (req, res, next) => {
     const user = req.body;
     const result = await UserServices.createUser(user);
     res.status(201).json(result);
-    transporter.sendMail({
-      from: process.env.G_NAME,
-      to: result.user.email,
-      subject: 'Bienvenido a UniMarcket',
-      text: 'Bienvenido a UniMarcket',
-      html: template(result.user)
-    });
+    transporter.sendMail(
+      {
+        from: process.env.G_NAME,
+        to: result.userCreated.email,
+        subject: 'Bienvenido a UniMarcket',
+        text: 'Bienvenido a UniMarcket',
+        html: template(result.userCreated)
+      },
+      (err, info) => {
+        err && console.log(err);
+      }
+    );
   } catch (error) {
     next({
       status: 400,
