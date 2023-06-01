@@ -1,18 +1,14 @@
 const { Users, Carts, Business } = require('../models');
 
 class UserServices {
-  static async createUser(datos) {
+  static async createUser({ user, business }) {
     try {
-      const {
-        fullName, username, email, password, roleId, imgProfile, number, isClientFinal,
-        nameBusiness, city, address, nit
-      } = datos;
+      const userCreated = await Users.create(user);
+      const cart = await Carts.create({ userId: userCreated.id });
+      let business = null;
+      if (business) business = await Business.create({ ...business, userId: userCreated.id });
 
-      const user = await Users.create({ fullName, username, email, password, roleId, imgProfile, number, isClientFinal });
-      const business = await Business.create({ name: nameBusiness, city, address, nit, userId: user.id });
-      const cart = await Carts.create({userId: user.id})
-
-      return { user, business, cart };
+      return { user: { ...userCreated, cart }, business };
     } catch (error) {
       throw error;
     }
@@ -60,7 +56,7 @@ class UserServices {
           exclude: ['password', 'createdAt', 'updatedAt']
         }
       });
-    return result;
+      return result;
     } catch (error) {
       throw error;
     }
@@ -76,7 +72,7 @@ class UserServices {
   static async verifyUser(id) {
     try {
       await Users.update({ isVerify: true }, { where: { id } });
-      return { message: 'Usuario actualizado' };
+      return { message: 'Verificación exitosa' };
     } catch (error) {
       throw error;
     }
