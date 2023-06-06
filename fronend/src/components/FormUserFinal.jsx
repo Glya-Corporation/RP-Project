@@ -1,55 +1,68 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import "../styles/register.css";
-import { useSelector } from "react-redux";
-import Example from "./registroExitoso";
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import '../styles/register.css';
+import { useDispatch, useSelector } from 'react-redux';
+import Example from './registroExitoso';
+import { addUserThunk } from '../store/slices/user.slice';
 
 const RegistroFormUser = ({ rol }) => {
   /*provincias */
-  const provincia = useSelector((state) => state.location);
+
+  const provincia = useSelector(state => state.location);
 
   /*-------- */
 
-  const [formData, setFormData] = useState(new FormData());
-  const [modal, setModal] = useState("");
+  const [formUser, setFormUser] = useState(new FormData());
+  const [business, setBusiness] = useState({});
+  const [modal, setModal] = useState('');
 
   /*-----seleccionar archivo */
-  const selectFile = (file) => {
+  const selectFile = file => {
     document.getElementById(file).click();
   };
 
   /*--------------- */
+  const handlePassword = () => {};
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
-    formData.set(name, value);
+    formUser.set(name, value);
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = event => {
     const { name, files } = event.target;
-    formData.set(name, files[0]);
+
+    const UrlImage = URL.createObjectURL(files[0]);
+    formUser.set(name, UrlImage.split('blob:')[1]);
   };
   const [pagina, setPagina] = useState(100);
   const handleNextPart = () => {
-    const formu = document.getElementById("formu");
+    const formu = document.getElementById('formu');
     setPagina(pagina + 100);
-    formu.style.marginLeft = "-" + pagina + "%";
+    formu.style.marginLeft = '-' + pagina + '%';
   };
   const [isOn, setIsOn] = useState(false);
 
   const toggleSwitch = () => setIsOn(!isOn);
   const spring = {
-    type: "spring",
+    type: 'spring',
     stiffness: 700,
-    damping: 30,
+    damping: 30
   };
+  /*-------- */
+  const dispatch = useDispatch();
+  /*-------- */
   const handleSubmit = () => {
-    setModal("xxl-down");
-    formData.append("rol", rol);
-    for (const pair of formData.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
+    setModal('xxl-down');
+    formUser.append('roleId', rol);
+    formUser.append('isClientFinal', true);
+    let user = new Object();
+    for (const pair of formUser.entries()) {
+      user[pair[0]] = pair[1];
     }
+
+    dispatch(addUserThunk({ user, business }));
   };
 
   return (
@@ -72,13 +85,9 @@ const RegistroFormUser = ({ rol }) => {
         <div className="pagina">
           <div className="titulo">Datos personales</div>
           <div className="form-control">
-            {" "}
+            {' '}
             <label> Nombre y apellido:</label>
-            <input
-              type="text"
-              name="nombreApellido"
-              onChange={handleInputChange}
-            />
+            <input type="text" name="fullName" onChange={handleInputChange} />
           </div>
           <br />
           <div className="form-control">
@@ -92,36 +101,24 @@ const RegistroFormUser = ({ rol }) => {
           </div>
           <br />
           <div className="form-control">
-            <label> Teléfono:</label>
-            <input type="tel" name="telefono" onChange={handleInputChange} />
+            <label> Numero de celular:</label>
+            <input type="tel" name="number" onChange={handleInputChange} />
           </div>
           <br />
           <div className="form-control">
             <label> Contraseña:</label>
-            <input
-              type="password"
-              name="password"
-              onChange={handleInputChange}
-            />
+            <input type="password" name="password" onChange={handleInputChange} />
           </div>
           <br />
           <div className="form-control">
             <label> Confirmar contraseña:</label>
-            <input
-              type="password"
-              name="confirmarPassword"
-              onChange={handleInputChange}
-            />
+            <input type="password" name="confirmarPassword" onChange={handlePassword()} />
           </div>
           <br />
           <div className="tyc">
             <div className="tyc-text">
               <p>
-                Acepto{" "}
-                <a href="#">
-                  términos y condiciones generales y política de privacidad
-                </a>{" "}
-                de Unimarket.
+                Acepto <a href="#">términos y condiciones generales y política de privacidad</a> de Unimarket.
               </p>
             </div>
             <div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
@@ -130,99 +127,65 @@ const RegistroFormUser = ({ rol }) => {
           </div>
 
           <div className="form-control">
-            <button
-              className="button-next "
-              type="button"
-              onClick={() => handleNextPart()}
-            >
+            <button className="button-next " type="button" onClick={() => handleNextPart()}>
               Siguiente
             </button>
           </div>
         </div>
         <div className="pagina">
-          {" "}
+          {' '}
           <div className="titulo">Datos personales</div>
-          <div className="form-control">
-            <label> Nombre de comercio:</label>
-            <input
-              type="text"
-              name="nombreComercio"
-              onChange={handleInputChange}
-            />
-          </div>
-          <br />
           <div className="form-control">
             <label> Tipo de documento:</label>
             <div className="tipo-cuit">
-              <select name="tipoDocumento" onChange={handleInputChange}>
+              <select name="dni" onChange={handleInputChange}>
                 <option value="dni">DNI</option>
               </select>
 
-              <input
-                type="text"
-                name="numeroDocumento"
-                onChange={handleInputChange}
-              />
+              <input type="text" name="dni" onChange={handleInputChange} />
             </div>
           </div>
           <br />
-          <div className="form-control">
+          {/* <div className="form-control">
             <label> Provincia:</label>
             <select name="provincia" onChange={handleInputChange}>
-              <option defaultValue={"true"} value="#">
+              <option defaultValue={'true'} value="#">
                 seleccione una opcion
               </option>
-              {provincia.map((e) => (
+              {provincia.map(e => (
                 <option key={e.id} value={e.nombre}>
                   {e.nombre}
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <br />
-          <div className="form-control">
+          {/* <div className="form-control">
             <label> Calle y número:</label>
-            <input
-              type="text"
-              name="calleNumero"
-              onChange={handleInputChange}
-            />
-          </div>
+            <input type="text" name="calleNumero" onChange={handleInputChange} />
+          </div> */}
           <br />
           <div className="form-control docum">
             <label> Foto de perfil:</label>
             <div className="ducumentacion">
-              <input
-                style={{ display: "none" }}
-                id="dniFrente"
-                type="file"
-                name="imagenDniFrente"
-                onChange={handleFileChange}
-              />
-              <button
-                onClick={() => selectFile("dniFrente")}
-                type="button"
-                className="icono"
-              >
-                <span className="material-symbols-outlined">
-                  drive_folder_upload
-                </span>
+              <input style={{ display: 'none' }} id="imgProfile" type="file" name="imgProfile" onChange={handleFileChange} />
+              <button onClick={() => selectFile('imgProfile')} type="button" className="icono">
+                <span className="material-symbols-outlined">drive_folder_upload</span>
                 subir archivo
               </button>
             </div>
           </div>
           <br />
           <div className="form-control">
-            <button
-              className="button-next "
-              type="button"
-              onClick={() => handleSubmit()}
-            >
+            <button className="button-omitir " type="button" onClick={() => handleSubmit()}>
+              Omitir
+            </button>
+            <button className="button-next " type="button" onClick={() => handleSubmit()}>
               Crear cuenta
             </button>
           </div>
         </div>
-      </form>{" "}
+      </form>{' '}
       <Example modal={modal} />
     </div>
   );

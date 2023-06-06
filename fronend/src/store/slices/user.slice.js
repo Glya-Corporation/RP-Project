@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import { setIsLoading } from './isLoading.slice';
 export const userSlice = createSlice({
   name: 'user',
   initialState: {},
@@ -12,12 +12,15 @@ export const userSlice = createSlice({
   }
 });
 
-export const addUserThunk = newUser => dispatch => {
-  return axios
-    .post(`http://localhost:1811/api/v1/user/register`, newUser)
-    .then(res => dispatch(setUser(res.data)))
-    .catch(error => console.error(error));
-};
+export const addUserThunk =
+  ({ user, business }) =>
+  dispatch => {
+    dispatch(setIsLoading(true));
+    return axios
+      .post('http://localhost:1811/api/v1/user/register', { user, business })
+      .then(() => dispatch(setIsLoading(false)))
+      .catch(error => console.error(error));
+  };
 
 export const { setUser } = userSlice.actions;
 

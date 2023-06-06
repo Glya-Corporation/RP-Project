@@ -70,7 +70,18 @@ form .pagina {
   border-radius: 25px;
   color: white;
 }
-
+.button-omitir {
+  background-color: transparent;
+  height: 45px;
+  width: 100%;
+  max-width: var(--button-w);
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+}
+.button-omitir:hover {
+  color: #737373;
+}
 .form-control {
   display: flex !important;
   text-align: left;
@@ -117,10 +128,10 @@ form .pagina {
   cursor: pointer;
 }
 
-.switch[data-isOn="true"] {
+.switch[data-isOn='true'] {
   justify-content: flex-end;
 }
-.switch[data-isOn="true"] .handle {
+.switch[data-isOn='true'] .handle {
   background-color: rgb(70, 98, 158);
   transition: 0.3s;
 }

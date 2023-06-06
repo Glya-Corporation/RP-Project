@@ -1,24 +1,22 @@
+const app = require('./app');
+const http = require('http');
+const swaggerDocs = require('../swagger');
+require('dotenv').config();
 
-const app = require("./app");
-const http = require("http");
-const swaggerDocs = require("../swagger");
-const socketIO = require("socket.io");
+const socketIO = require('socket.io');
 
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: "*"
+    origin: '*'
   }
 });
 
-require("dotenv").config();
-require("./socket.io")(io);
-
-app.set("io", io);
-
+app.set('io', io);
+require('./socket.io')(io);
 const PORT = process.env.PORT || 8000;
-
+const HOST = process.env.HOST || 'http://localhost:8000';
 server.listen(PORT, () => {
-  console.log(`Runing server in: ${process.env.HOST}`);
+  console.log(`Runing server in: ${HOST}`);
   swaggerDocs(app, PORT);
 });

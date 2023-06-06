@@ -1,19 +1,20 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import "../styles/register.css";
-import RegistrationForm from "../components/FormComerciante";
-import RegistroFormUser from "../components/FormUserFinal";
+import React, { useState } from 'react';
+import '../styles/register.css';
+import RegistrationForm from '../components/FormComerciante';
+import RegistroFormUser from '../components/FormUserFinal';
 const SelectRol = () => {
-  const [rol, setRol] = useState("");
-  const [handleForm, setHandleForm] = useState("");
+  const [rol, setRol] = useState();
+  const [handleForm, setHandleForm] = useState('');
 
   const [pagina, setPagina] = useState(100);
   const handleNextPart = () => {
-    const formu = document.getElementById("mostrar-form");
+    const formu = document.getElementById('mostrar-form');
     setHandleForm(rol);
     setPagina(pagina + 100);
-    formu.style.marginLeft = "-" + pagina + "%";
+    formu.style.marginLeft = '-' + pagina + '%';
   };
+  console.log(handleForm);
 
   return (
     <div className="content-form">
@@ -22,44 +23,29 @@ const SelectRol = () => {
           <div className="titulo">Seleccionar rol</div>
 
           <div className="content-rol">
-            <button onClick={() => setRol("mayorista")} className="button-rol">
+            <button onClick={() => setRol(1)} className="button-rol">
               Soy mayorista
             </button>
 
-            <button
-              onClick={() => setRol("distribuidor")}
-              className="button-rol"
-            >
+            <button onClick={() => setRol(2)} className="button-rol">
               Soy distribuidor o proveedor
             </button>
 
-            <button
-              onClick={() => setRol("comerciante")}
-              className="button-rol"
-            >
+            <button onClick={() => setRol(3)} className="button-rol">
               Soy comerciante o reevendedor
             </button>
 
-            <button
-              onClick={() => setRol("consumidor_final")}
-              className="button-rol"
-            >
+            <button onClick={() => setRol(4)} className="button-rol">
               Soy consumidor final
             </button>
 
             <button onClick={() => handleNextPart()} className="button-next">
-              {" "}
+              {' '}
               siguiente
             </button>
           </div>
         </div>
-        <div className="pagina-rol">
-          {handleForm === "comerciante" ? (
-            <RegistrationForm rol={rol} />
-          ) : (
-            handleForm === "consumidor_final" && <RegistroFormUser rol={rol} />
-          )}
-        </div>
+        <div className="pagina-rol">{handleForm == 4 ? <RegistroFormUser rol={rol} /> : handleForm == 1 || 2 || (3 && <RegistrationForm rol={rol} />)}</div>
       </div>
     </div>
   );
